@@ -23,12 +23,9 @@ export class CategoryService{
         }
     }
 
-    async update(updateCategoryDto:UpdateCategoryDto, _id:string):Promise<CartegoryEntity>{
+    async update(updateCategoryDto:UpdateCategoryDto, id:string):Promise<CartegoryEntity>{
         try {
-            const category = await CategoryModel.findByIdAndUpdate({
-                _id: updateCategoryDto,
-                data:{...updateCategoryDto}
-            });
+            const category = await CategoryModel.findByIdAndUpdate(id, {...updateCategoryDto});
             if(!category) throw CustomError.badRequest("update category  failed")
             await category.save();
             return categoryMaper.fromEntity(category);

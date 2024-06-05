@@ -20,12 +20,9 @@ export class ProductService{
         }
     }
 
-    async update(updateProductDto:UpdateProductDto, _id:string):Promise<ProductEntity>{
+    async update(updateProductDto:UpdateProductDto, id:string):Promise<ProductEntity>{
         try {
-            const product = await ProductModel.findOneAndUpdate({
-                _id: {_id},
-                data:{...updateProductDto}
-            });
+            const product = await ProductModel.findByIdAndUpdate(id, {...updateProductDto});
             if(!product) throw CustomError.badRequest("update product failed")
             await product.save();
             return ProductMaper.fromEntity(product);

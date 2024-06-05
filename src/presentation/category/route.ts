@@ -9,7 +9,7 @@ export class CategoryRoute{
         const controller = new CategoryController(categoryServices)
         routes.get('/:id', controller.findOne);
         routes.put('/:id', controller.update);
-        routes.delete('/id', controller.delete);
+        routes.delete('/:id', controller.delete);
         routes.post('/', controller.create)
         return routes;
     }
